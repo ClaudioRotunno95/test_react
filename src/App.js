@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect, useState } from 'react';
+import Header from './Header/Header';
+import Navbar from './Navbar/Navbar';
+import Core from './Core/Core';
+import Footer from './Footer/Footer';
+
+const API = 'https://jsonplaceholder.typicode.com/todos';
 
 function App() {
+
+  
+  const [data, setData] = useState([]);
+  const [backup, setBackup] = useState([]);
+
+  useEffect(() => {fetch(API).then(res => res.json()).then(response => {setData(response); setBackup(response)})}, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div style={{display: 'flex'}}>
+      <Navbar data = {data} setBackup = {setBackup}/>
+      <div style={{display: 'flex', flexDirection: 'column', width:'75%'}}><Core backup = {backup} /></div>
+      </div>
+      <Footer />
     </div>
   );
 }
