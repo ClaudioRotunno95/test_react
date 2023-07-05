@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 /*function Core() {
   
     return (
@@ -8,9 +9,10 @@
   
   
 
-  const Core = ({backup}) => {
+  const Core = ({backup, paginationInfo}) => {
     console.log(backup);
-    return backup?.slice(0,6).map(e =>
+    
+    return backup?.slice(paginationInfo.from, paginationInfo.to).map(e =>
         <div
     key={e.id}
     style = {{border:'2px solid black'}}
